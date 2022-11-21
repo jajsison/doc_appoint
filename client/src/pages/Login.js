@@ -7,17 +7,17 @@ import toast from 'react-hot-toast';
 
 function Login() {
   const navigate = useNavigate();
-  const onFinish =async(values) =>{
-    console.log("Recieve values of form", values)
+  const onFinish = async(values) =>{
+    //console.log("Recieve values of form", values)
 
     try {
-      const response = await axios.post('/api/user/register', values);
+      const response = await axios.post("/api/user/login", values);
       if(response.data.success){
         toast.success(response.data.message);
-        toast("Redirecting to homepage");
+        toast("Redirecting to home page");
         localStorage.setItem (
           "token",
-          response.data.token
+          response.data.data
         );
 
         navigate("/");
