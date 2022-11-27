@@ -1,35 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 
-*{
-  font-family: 'Montesrrat', sans-serif !important;
+* {
+  font-family: "Montesrrat", sans-serif !important;
 }
 /*antd override*/
-input{
+input {
   border-radius: 0 !important;
   border: 1px solid rgba(128, 128, 128, 0.178) !important;
   height: 40px !important;
 }
-input:focus{
+input:focus {
   outline: none !important;
   box-shadow: none !important;
   border: 1px solid gray !important;
 }
-label{
+label {
   font-size: 16px !important;
   color: black !important;
 }
 
-.ant-form-item{
+.ant-form-item {
   margin: 10px 0 !important;
 }
 
 /* Common styling */
+.spinner-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-.card-title {
-  font-size: 1.5rem;
+  opacity: 0.5;
+  background-color: black;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.spinner-border {
+  width: 5rem;
+  height: 5rem;
+  color: white;
+}
+.page-title {
+  font-size: 25px;
+  color: rgba(0, 0, 0, 0.842);
   font-weight: bold;
 }
 
+.card-title {
+  font-size: 22px;
+  font-weight: bold;
+  color:rgba(0, 0, 0, 0.63);
+}
+ 
 .normal-text {
   font-size: 1rem;
 }
@@ -38,24 +63,27 @@ label{
   box-shadow: 0 0 2px gray;
   border-radius: 0 !important;
 }
-.primary-button{
-background-color: blue !important;
-border-color: aqua !important;
-height: 40px !important;
-width: 100% !important;
-color: white !important;
-font-size: 16px !important;
+.primary-button {
+  background-color: blue !important;
+  border-color: aqua !important;
+  height: 40px !important;
+  width: 100% !important;
+  color: white !important;
+  font-size: 16px !important;
 }
 
-.anchor{
+.anchor {
   color: black !important;
   text-decoration: underline;
   font-size: 16px !important;
 }
-.anchor:hover{
+.anchor:hover {
   text-decoration: underline !important;
 }
 
+.remix-icons {
+  font-size: 18px !important;
+}
 /* authentication pages */
 
 .authentication {
@@ -79,5 +107,4 @@ font-size: 16px !important;
   padding: 7px 15px;
   margin-left: -40px;
   border-bottom-left-radius: 10px;
-
 }
