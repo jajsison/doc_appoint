@@ -1,64 +1,59 @@
-import React from 'react'
-import {Button, Form, Input} from 'antd'
-import {Link, useNavigate} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux';
+import React from "react";
+import { Button, Form, Input } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import toast from 'react-hot-toast';
-import { hideLoading } from '../redux/alertsSlice';
-import { showLoading } from '../redux/alertsSlice'; 
-
+import toast from "react-hot-toast";
+import { hideLoading } from "../redux/alertsSlice";
+import { showLoading } from "../redux/alertsSlice";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const onFinish = async(values) =>{
+  const onFinish = async (values) => {
     //console.log("Recieve values of form", values)
 
     try {
-      dispatch(showLoading())
+      dispatch(showLoading());
       const response = await axios.post("/api/user/login", values);
-      dispatch(hideLoading())
-      if(response.data.success){
+      dispatch(hideLoading());
+      if (response.data.success) {
         toast.success(response.data.message);
         toast("Redirecting to home page");
-        localStorage.setItem (
-          "token",
-          response.data.data
-        );
+        localStorage.setItem("token", response.data.data);
 
         navigate("/");
-      }else{
+      } else {
         toast.error(response.data.message);
-
       }
-      } catch (error) {
-        dispatch(hideLoading())
-        toast.error("Something went wrong");
-      }
-
-  }
+    } catch (error) {
+      dispatch(hideLoading());
+      toast.error("Something went wrong");
+    }
+  };
   return (
-    <div className='authentication'>
-      <div className ='authentication-form card p-2'>
-        <h1 className='card-title'> Welcome Back</h1>
-        <Form layout='vertical' onFinish={onFinish}>
+    <div className="authentication">
+      <div className="authentication-form card p-2">
+        <h1 className="card-title"> Welcome Back</h1>
+        <Form layout="vertical" onFinish={onFinish}>
+          <Form.Item label="Email" name="email">
+            <Input placeholder="Email" />
+          </Form.Item>
+          <Form.Item label="Password" name="password">
+            <Input placeholder="Password" type="password" />
+          </Form.Item>
 
-            <Form.Item label='Email' name ='email'>
-              <Input placeholder ='Email' />
-            </Form.Item>
-            <Form.Item label='Password' name ='password' >
-              <Input placeholder ='Password' type ='password' />
-            </Form.Item>
+          <Button className="primary-button my-3" htmlType="submit">
+            Login
+          </Button>
 
-            <Button className='primary-button my-3' htmlType='submit'>Login</Button>
-
-            <Link to='/register' className='anchor mt-2'>Click HERE TO REGISTER </Link>
-
+          <Link to="/register" className="anchor mt-2">
+            Click HERE TO REGISTER{" "}
+          </Link>
         </Form>
       </div>
-     
-   </div>
-  )
+    </div>
+  );
 }
 
 export default Login;

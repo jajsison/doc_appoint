@@ -14,6 +14,7 @@ function Home() {
           },
         }
       );
+      console.log(response);
     } catch (error) {}
   };
   useEffect(() => {

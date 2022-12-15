@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../layout.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Badge } from "antd";
 
 function Layout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -12,7 +13,7 @@ function Layout({ children }) {
   const userMenu = [
     {
       name: "Home",
-      link: "/",
+      path: "/",
       icon: "ri-home-2-line",
     },
     {
@@ -30,12 +31,11 @@ function Layout({ children }) {
       path: "/profile",
       icon: "ri-profile-line",
     },
-    
   ];
   const adminMenu = [
     {
       name: "Home",
-      link: "/",
+      path: "/",
       icon: "ri-home-2-line",
     },
     {
@@ -44,7 +44,7 @@ function Layout({ children }) {
       icon: "ri-file-user-line",
     },
     {
-      name: "Doctors",
+      name: "Doctor",
       path: "/doctors",
       icon: "ri-hospital-line",
     },
@@ -53,7 +53,6 @@ function Layout({ children }) {
       path: "/profile",
       icon: "ri-profile-line",
     },
-    
   ];
 
   const menuToBeRendered = user?.isAdmin ? adminMenu : userMenu;
@@ -80,17 +79,15 @@ function Layout({ children }) {
               );
             })}
             <div
-                  className={`d-flex menu-item`} onClick={()=>{
-                    localStorage.clear()
-                    navigate('/login')
-                 
-                  }}>
-                  <i className='ri-logout-circle-line'></i>
-                  {!collapsed && <Link to='/login'>Logout</Link>}
-                </div>
-
-
-            
+              className={`d-flex menu-item`}
+              onClick={() => {
+                localStorage.clear();
+                navigate("/login");
+              }}
+            >
+              <i className="ri-logout-circle-line"></i>
+              {!collapsed && <Link to="/login">Logout</Link>}
+            </div>
           </div>
         </div>
 
@@ -109,8 +106,13 @@ function Layout({ children }) {
             )}
 
             <div className="d-flex align-items-center px-4">
-              <i className="ri-notification-line header-action-icon px-3"></i>
-              <Link className="anchor" to="/profile">
+              <Badge
+                count={user?.unseenNotifications.length}
+                onClick={() => navigate("/notifications")}
+              >
+                <i className="ri-notification-line header-action-icon px-3"></i>
+              </Badge>
+              <Link className="anchor mx-2" to="/profile">
                 {user?.name}
               </Link>
             </div>
